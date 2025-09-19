@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACS 2025 Mole Hunt - The Hidden Life of Spices</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #FFD700 100%);
+            min-height: 100vh;
+            color: #333;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #8B4513;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #D2691E;
+            font-size: 16px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #D2691E;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #D2691E;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .tab-button.active {
+            background: #D2691E;
+            color: white;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background: #ddd;
+            border: 2px solid #999;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .puzzle-piece.completed {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            border-color: #8B4513;
+        }
+
+        .puzzle-piece.current {
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 10px #FFD700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hint-box {
+            background: #FFF8DC;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #D2691E;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .option {
+            padding: 12px;
+            background: white;
+            border: 2px solid #D2691E;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option.selected {
+            background: #D2691E;
+            color: white;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .message.success {
+            background: #90EE90;
+            color: #2E7D32;
+        }
+
+        .message.error {
+            background: #FFB6C1;
+            color: #8B0000;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th, .leaderboard-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .leaderboard-table th {
+            background: #8B4513;
+            color: white;
+        }
+
+        .points-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8B4513;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .warning-banner {
+            background: #FFA500;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌶️ ACS 2025 Mole Hunt 🌶️</h1>
+            <p>The Hidden Life of Spices</p>
+        </div>
+
+        <!-- Auth Screen -->
+        <div id="authScreen" class="card">
+            <div class="tab-buttons">
+                <div class="tab-button active" onclick="showTab('login')">Login</div>
+                <div class="tab-button" onclick="showTab('register')">Register</div>
+                <div class="tab-button" onclick="showTab('admin')">Admin</div>
+            </div>
+
+            <div id="loginForm">
+                <h2>Welcome Back!</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="loginFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="loginLastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div id="registerForm" class="hidden">
+                <h2>Join the Hunt!</h2>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="regFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="regLastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Team/Organization</label>
+                        <select id="regTeam" required>
+                            <option value="">Select your team...</option>
+                            <option value="ACM">ACM</option>
+                            <option value="ACS">ACS</option>
+                            <option value="ASME">ASME</option>
+                            <option value="IEEE">IEEE</option>
+                            <option value="SASE">SASE</option>
+                            <option value="SCE">SCE</option>
+                            <option value="SHPE">SHPE</option>
+                            <option value="SWE">SWE</option>
+                            <option value="NSBE">NSBE</option>
+                            <option value="Independent">Independent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" required>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+
+            <div id="adminForm" class="hidden">
+                <h2>Admin Access</h2>
+                <p>⚠️ acs only! ⚠️</p>
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" id="adminUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="adminPassword" required>
+                    </div>
+                    <button type="submit">Admin Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="hidden">
+            <div id="warningBanner" class="warning-banner hidden"></div>
+            
+            <div class="card">
+                <h2 id="playerName">Welcome!</h2>
+                <p id="playerTeam">Team: </p>
+                <div class="points-display">Points: <span id="playerPoints">0</span></div>
+            </div>
+
+            <div class="tab-buttons">
+                <div class="tab-button active" onclick="showGameTab('hunt')">Hunt</div>
+                <div class="tab-button" onclick="showGameTab('leaderboard')">Leaderboard</div>
+            </div>
+
+            <div id="huntTab">
+                <div class="card">
+                    <h3>Find the ACS Mole!</h3>
+                    <div class="puzzle-grid" id="puzzleGrid"></div>
+                    <p style="text-align: center; color: #8B4513; font-weight: bold;">
+                        Currently seeking: Puzzle Piece #<span id="currentTarget">1</span>
+                    </p>
+                </div>
+
+                <div id="currentHint" class="card hint-box hidden">
+                    <h3>Your Next Clue:</h3>
+                    <p id="hintText"></p>
+                </div>
+
+                <div id="locationVerify" class="card hidden">
+                    <h3>Verify Location</h3>
+                    <p>Enter the PIN code found at this location:</p>
+                    <form onsubmit="verifyLocation(event)">
+                        <div class="form-group">
+                            <input type="text" id="locationPin" placeholder="4-digit PIN" maxlength="4" required>
+                        </div>
+                        <button type="submit">Verify</button>
+                    </form>
+                </div>
+
+                <div id="questionCard" class="card hidden">
+                    <h3>Chemistry Challenge!</h3>
+                    <p id="questionText"></p>
+                    <div class="options" id="optionsContainer"></div>
+                    <button onclick="submitAnswer()" style="margin-top: 15px;">Submit Answer</button>
+                    <p style="margin-top: 10px; text-align: center;">
+                        Attempt: <span id="attemptNumber">1</span>/4
+                    </p>
+                </div>
+            </div>
+
+            <div id="leaderboardTab" class="card hidden">
+                <h3>Team Standings</h3>
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Team</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody"></tbody>
+                </table>
+            </div>
+
+            <button onclick="logout()" style="margin-top: 20px;">Logout</button>
+        </div>
+
+        <!-- Admin Screen -->
+        <div id="adminScreen" class="hidden">
+            <div class="card">
+                <h2>Admin Dashboard</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div style="text-align: center; padding: 10px; background: #FFF8DC; border-radius: 8px;">
+                        <h3 id="totalPlayers">0</h3>
+                        <p>Total Players</p>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: #FFF8DC; border-radius: 8px;">
+                        <h3 id="activePlayers">0</h3>
+                        <p>Active Now</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Player Monitoring</h3>
+                <div style="margin-bottom: 15px;">
+                    <input type="text" id="playerSearch" placeholder="Search by name..." style="margin-bottom: 10px;">
+                    <button onclick="refreshAdminData()">Refresh</button>
+                </div>
+                <div id="adminUserList"></div>
+            </div>
+
+            <button onclick="logout()" style="margin-top: 20px;">Logout</button>
+        </div>
+
+        <!-- Message Display -->
+        <div id="messageDisplay"></div>
+    </div>
+
+    <div class="footer">Made by ACS Wilbur Wright College</div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentPuzzle = null;
+        let selectedAnswer = null;
+        let puzzleStatus = {};
+        let puzzleOrder = [];
+        let currentPuzzleIndex = 0;
+
+        // Tab switching
+        function showTab(tab) {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('adminForm').classList.add('hidden');
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.querySelectorAll('.tab-button')[0].classList.add('active');
+            } else if (tab === 'register') {
+                document.getElementById('registerForm').classList.remove('hidden');
+                document.querySelectorAll('.tab-button')[1].classList.add('active');
+            } else if (tab === 'admin') {
+                document.getElementById('adminForm').classList.remove('hidden');
+                document.querySelectorAll('.tab-button')[2].classList.add('active');
+            }
+        }
+
+        function showGameTab(tab) {
+            document.querySelectorAll('#gameScreen .tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (tab === 'hunt') {
+                document.getElementById('huntTab').classList.remove('hidden');
+                document.getElementById('leaderboardTab').classList.add('hidden');
+                document.querySelectorAll('#gameScreen .tab-button')[0].classList.add('active');
+            } else if (tab === 'leaderboard') {
+                document.getElementById('huntTab').classList.add('hidden');
+                document.getElementById('leaderboardTab').classList.remove('hidden');
+                document.querySelectorAll('#gameScreen .tab-button')[1].classList.add('active');
+                loadLeaderboard();
+            }
+        }
+
+        // Authentication
+        async function handleLogin(event) {
+            event.preventDefault();
+            const data = {
+                first_name: document.getElementById('loginFirstName').value,
+                last_name: document.getElementById('loginLastName').value,
+                password: document.getElementById('loginPassword').value
+            };
+            
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    currentUser = result.user_id;
+                    showGame();
+                } else {
+                    showMessage('Invalid credentials. Please try again.', 'error');
+                }
+            } catch (error) {
+                showMessage('Connection error. Please try again.', 'error');
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            const data = {
+                first_name: document.getElementById('regFirstName').value,
+                last_name: document.getElementById('regLastName').value,
+                team: document.getElementById('regTeam').value,
+                password: document.getElementById('regPassword').value
+            };
+            
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    currentUser = result.user_id;
+                    showMessage('Registration successful!', 'success');
+                    setTimeout(showGame, 1500);
+                } else {
+                    showMessage(result.message || 'Registration failed.', 'error');
+                }
+            } catch (error) {
+                showMessage('Connection error. Please try again.', 'error');
+            }
+        }
+
+        async function handleAdminLogin(event) {
+            event.preventDefault();
+            const data = {
+                username: document.getElementById('adminUsername').value,
+                password: document.getElementById('adminPassword').value
+            };
+            
+            try {
+                const response = await fetch('/admin_login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showAdminDashboard();
+                } else {
+                    showMessage('Invalid admin credentials.', 'error');
+                }
+            } catch (error) {
+                showMessage('Connection error. Please try again.', 'error');
+            }
+        }
+
+        // Game Functions
+        async function showGame() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            await loadUserProfile();
+        }
+
+        async function loadUserProfile() {
+            try {
+                const response = await fetch(`/profile/${currentUser}`);
+                
+                if (response.status === 403) {
+                    const data = await response.json();
+                    alert(`BANNED: ${data.message}`);
+                    logout();
+                    return;
+                }
+                
+                const data = await response.json();
+                
+                document.getElementById('playerName').textContent = `Welcome, ${data.user.first_name}!`;
+                document.getElementById('playerTeam').textContent = `Team: ${data.user.team}`;
+                document.getElementById('playerPoints').textContent = data.user.points;
+                
+                if (data.user.warnings > 0) {
+                    document.getElementById('warningBanner').classList.remove('hidden');
+                    document.getElementById('warningBanner').textContent = 
+                        `Warning ${data.user.warnings}: Please play fairly!`;
+                }
+                
+                puzzleStatus = data.puzzle_status;
+                puzzleOrder = data.puzzle_order;
+                currentPuzzleIndex = data.current_puzzle_index;
+                
+                if (data.current_hint) {
+                    document.getElementById('currentHint').classList.remove('hidden');
+                    document.getElementById('hintText').textContent = data.current_hint;
+                }
+                
+                if (currentPuzzleIndex < 16) {
+                    document.getElementById('currentTarget').textContent = puzzleOrder[currentPuzzleIndex];
+                }
+                
+                renderPuzzleGrid();
+            } catch (error) {
+                showMessage('Error loading profile.', 'error');
+            }
+        }
+
+        function renderPuzzleGrid() {
+            const grid = document.getElementById('puzzleGrid');
+            grid.innerHTML = '';
+            
+            for (let i = 1; i <= 16; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                piece.textContent = i;
+                
+                if (puzzleStatus[i]) {
+                    if (puzzleStatus[i].location_confirmed && puzzleStatus[i].question_correct) {
+                        piece.classList.add('completed');
+                    }
+                }
+                
+                if (puzzleOrder[currentPuzzleIndex] === i && !puzzleStatus[i]?.question_correct) {
+                    piece.classList.add('current');
+                }
+                
+                piece.onclick = () => selectPuzzle(i);
+                grid.appendChild(piece);
+            }
+        }
+
+        function selectPuzzle(puzzleNumber) {
+            currentPuzzle = puzzleNumber;
+            const currentPuzzleInOrder = puzzleOrder[currentPuzzleIndex];
+            
+            if (puzzleNumber !== currentPuzzleInOrder && (!puzzleStatus[puzzleNumber] || !puzzleStatus[puzzleNumber].location_confirmed)) {
+                showMessage(`Please find puzzle piece #${currentPuzzleInOrder} first!`, 'error');
+                return;
+            }
+            
+            if (!puzzleStatus[puzzleNumber] || !puzzleStatus[puzzleNumber].location_confirmed) {
+                document.getElementById('locationVerify').classList.remove('hidden');
+                document.getElementById('questionCard').classList.add('hidden');
+            } else if (!puzzleStatus[puzzleNumber].question_correct && puzzleStatus[puzzleNumber].attempts < 4) {
+                document.getElementById('questionCard').classList.remove('hidden');
+                document.getElementById('locationVerify').classList.add('hidden');
+            }
+        }
+
+        async function verifyLocation(event) {
+            event.preventDefault();
+            const pin = document.getElementById('locationPin').value;
+            
+            try {
+                const response = await fetch('/verify_location', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        puzzle_piece: currentPuzzle,
+                        pin: pin
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    showMessage('Location verified!', 'success');
+                    document.getElementById('locationVerify').classList.add('hidden');
+                    showQuestion(result.question);
+                    await loadUserProfile();
+                } else {
+                    showMessage('Incorrect PIN. Keep searching!', 'error');
+                    document.getElementById('locationPin').value = '';
+                }
+            } catch (error) {
+                showMessage('Error verifying location.', 'error');
+            }
+        }
+
+        function showQuestion(question) {
+            document.getElementById('questionCard').classList.remove('hidden');
+            document.getElementById('questionText').textContent = question.question;
+            
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = option;
+                div.onclick = () => selectOption(index);
+                container.appendChild(div);
+            });
+        }
+
+        function selectOption(index) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.option')[index].classList.add('selected');
+            selectedAnswer = index;
+        }
+
+        async function submitAnswer() {
+            if (selectedAnswer === null) {
+                showMessage('Please select an answer!', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/submit_answer', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        puzzle_piece: currentPuzzle,
+                        answer: selectedAnswer
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.correct) {
+                    showMessage(`Correct! +${result.points_earned} points!`, 'success');
+                    document.getElementById('questionCard').classList.add('hidden');
+                    if (result.next_hint) {
+                        document.getElementById('hintText').textContent = result.next_hint;
+                    }
+                } else {
+                    if (result.attempts < 4) {
+                        showMessage(`Incorrect. Try again! (${result.attempts}/4)`, 'error');
+                        document.getElementById('attemptNumber').textContent = result.attempts + 1;
+                    } else {
+                        showMessage('Max attempts reached.', 'error');
+                        document.getElementById('questionCard').classList.add('hidden');
+                        if (result.next_hint) {
+                            document.getElementById('hintText').textContent = result.next_hint;
+                        }
+                    }
+                }
+                
+                selectedAnswer = null;
+                await loadUserProfile();
+            } catch (error) {
+                showMessage('Error submitting answer.', 'error');
+            }
+        }
+
+        async function loadLeaderboard() {
+            try {
+                const response = await fetch('/leaderboard');
+                const teams = await response.json();
+                
+                const tbody = document.getElementById('leaderboardBody');
+                tbody.innerHTML = '';
+                
+                teams.forEach((team, index) => {
+                    const row = tbody.insertRow();
+                    row.insertCell(0).textContent = index + 1;
+                    row.insertCell(1).textContent = team.team;
+                    row.insertCell(2).textContent = team.points;
+                });
+            } catch (error) {
+                showMessage('Error loading leaderboard.', 'error');
+            }
+        }
+
+        // Admin Functions
+        async function showAdminDashboard() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('adminScreen').classList.remove('hidden');
+            await refreshAdminData();
+        }
+
+        async function refreshAdminData() {
+            const search = document.getElementById('playerSearch')?.value || '';
+            
+            try {
+                const response = await fetch(`/admin/dashboard?search=${search}`);
+                const data = await response.json();
+                
+                document.getElementById('totalPlayers').textContent = data.total_players;
+                document.getElementById('activePlayers').textContent = data.active_players;
+                
+                const userList = document.getElementById('adminUserList');
+                userList.innerHTML = '';
+                
+                data.users.forEach(user => {
+                    const div = document.createElement('div');
+                    div.style.padding = '10px';
+                    div.style.marginBottom = '10px';
+                    div.style.background = user.is_banned ? '#FFE4E1' : 
+                                         user.warnings > 0 ? '#FFF8DC' : '#F0F0F0';
+                    div.style.borderRadius = '8px';
+                    
+                    div.innerHTML = `
+                        <strong>${user.name} - ${user.team}</strong><br>
+                        Points: ${user.points} | Progress: ${user.completed_puzzles}/16<br>
+                        ${user.warnings > 0 ? `Warnings: ${user.warnings}<br>` : ''}
+                        ${user.is_banned ? 'BANNED<br>' : ''}
+                        <button onclick="warnUser(${user.id}, '${user.name}')" 
+                                style="margin-top: 5px; padding: 5px 10px;">Warn</button>
+                        <button onclick="banUser(${user.id}, '${user.name}')" 
+                                style="margin-top: 5px; padding: 5px 10px; background: #DC143C;">Ban</button>
+                    `;
+                    
+                    userList.appendChild(div);
+                });
+            } catch (error) {
+                showMessage('Error loading admin data.', 'error');
+            }
+        }
+
+        async function warnUser(userId, userName) {
+            if (confirm(`Warn ${userName}?`)) {
+                try {
+                    await fetch(`/admin/warn_user/${userId}`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({})
+                    });
+                    showMessage('Warning sent!', 'success');
+                    refreshAdminData();
+                } catch (error) {
+                    showMessage('Error sending warning.', 'error');
+                }
+            }
+        }
+
+        async function banUser(userId, userName) {
+            if (confirm(`Ban ${userName}? This will remove all their points.`)) {
+                try {
+                    await fetch(`/admin/ban_user/${userId}`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({reason: 'Cheating'})
+                    });
+                    showMessage('User banned!', 'success');
+                    refreshAdminData();
+                } catch (error) {
+                    showMessage('Error banning user.', 'error');
+                }
+            }
+        }
+
+        function logout() {
+            fetch('/logout').then(() => location.reload());
+        }
+
+        function showMessage(text, type) {
+            const div = document.getElementById('messageDisplay');
+            div.innerHTML = `<div class="message ${type}">${text}</div>`;
+            setTimeout(() => { div.innerHTML = ''; }, 3000);
+        }
+    </script>
+</body>
+</html>
