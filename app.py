@@ -17,8 +17,8 @@ CORS(app)
 db = SQLAlchemy(app)
 
 # Admin credentials - CHANGE THESE!
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "spice2024admin"
+ADMIN_USERNAME = "adacsisdabestmin"
+ADMIN_PASSWORD = "ACS"
 
 # Database Models
 class User(db.Model):
