@@ -17,8 +17,8 @@ CORS(app)
 db = SQLAlchemy(app)
 
 # Admin credentials - CHANGE THESE!
-ADMIN_USERNAME = "adacsisdabestmin"
-ADMIN_PASSWORD = "ACS"
+ADMIN_USERNAME = "acsisdabestadmin"
+ADMIN_PASSWORD = "ACSchili2025admin"
 
 # Database Models
 class User(db.Model):
@@ -414,9 +414,9 @@ def admin_dashboard():
         
         if user.last_activity:
             minutes_ago = (datetime.utcnow() - user.last_activity).total_seconds() / 60
-            if minutes_ago < 5:
+            if minutes_ago < 10:
                 activity_status = 'active'
-            elif minutes_ago < 15:
+            elif minutes_ago < 20:
                 activity_status = 'idle'
             else:
                 activity_status = 'inactive'
