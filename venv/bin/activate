@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/cheyanne/ACSMoleHunt/AcsMoleHunt/venv"
+VIRTUAL_ENV="/Users/cheyanne/ACSMoleHunt/AcsMoleHunt-1/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
