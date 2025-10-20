@@ -59,7 +59,7 @@ CHEMISTRY_QUESTIONS = {
     1: {
         "question": "Which functional group is present in vanillin, the main compound in vanilla?",
         "options": ["Alcohol (-OH)", "Aldehyde (-CHO)", "Carboxylic acid (-COOH)", "Ester (-COOR)"],
-        "answer": 2
+        "answer": 1
     },
     2: {
         "question": "The pungency of mustard seeds is due to compounds formed when seeds are crushed. These are:",
