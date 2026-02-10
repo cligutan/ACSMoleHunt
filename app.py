@@ -16,9 +16,9 @@ CORS(app)
 
 db = SQLAlchemy(app)
 
-# Admin credentials - CHANGE THESE!
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "spice2024admin"
+# Admin credentials
+ADMIN_USERNAME = "acsisdabestadmin"
+ADMIN_PASSWORD = "ACSchili2025admin"
 
 # Database Models
 class User(db.Model):
@@ -49,113 +49,113 @@ class Progress(db.Model):
 
 # Location pins - CHANGE THESE TO YOUR ACTUAL PINS!
 LOCATION_PINS = {
-    1: "1234", 2: "5678", 3: "9012", 4: "3456",
-    5: "7890", 6: "2345", 7: "6789", 8: "0123", 
-    9: "4567", 10: "1357", 11: "2468", 12: "3579",
-    13: "4680", 14: "5791", 15: "6802", 16: "7913"
+    1: "312297", 2: "119082", 3: "812942", 4: "806632",
+    5: "539485", 6: "954074", 7: "629241", 8: "701793", 
+    9: "231366", 10: "203102", 11: "762586", 12: "700624",
+    13: "449006", 14: "815838", 15: "816937", 16: "273797"
 }
 
 CHEMISTRY_QUESTIONS = {
     1: {
-        "question": "What spice contains the compound eugenol?",
-        "options": ["Cinnamon", "Cloves", "Black Pepper", "Turmeric"],
+        "question": "Which functional group is present in vanillin, the main compound in vanilla?",
+        "options": ["Alcohol (-OH)", "Aldehyde (-CHO)", "Carboxylic acid (-COOH)", "Ester (-COOR)"],
         "answer": 1
     },
     2: {
-        "question": "Which spice gets its yellow color from curcumin?",
-        "options": ["Saffron", "Paprika", "Turmeric", "Mustard"],
+        "question": "The pungency of mustard seeds is due to compounds formed when seeds are crushed. These are:",
+        "options": ["Alkaloids", "Terpenes", "Isothiocyanates", "Amino acids"],
         "answer": 2
     },
     3: {
-        "question": "Capsaicin is the active compound in which spice?",
-        "options": ["Chili Peppers", "Black Pepper", "Ginger", "Coriander"],
+        "question": "3. Nutmeg contains myristicin, a compound with psychoactive properties. To which chemical family does it belong?",
+        "options": ["Phenylpropanoids", "Carotenoids", "Amines", "Flavonoids"],
         "answer": 0
     },
     4: {
-        "question": "What is the main aromatic compound in cinnamon?",
-        "options": ["Menthol", "Vanillin", "Cinnamaldehyde", "Limonene"],
-        "answer": 2
+        "question": "Which spice is rich in allyl sulfides, compounds responsible for both aroma and health benefits?",
+        "options": ["Garlic", "Cinnamon", "Ginger", "Cardamom"],
+        "answer": 0
     },
     5: {
-        "question": "Piperine is responsible for the pungency of which spice?",
-        "options": ["White Pepper", "Black Pepper", "Cayenne", "Paprika"],
+        "question": "The compound responsible for the yellow color of turmeric is:",
+        "options": ["Capsaicin", "Curcumin", "Piperine", "Eugenol"],
         "answer": 1
     },
     6: {
-        "question": "Which spice contains the compound anethole?",
-        "options": ["Cumin", "Fennel", "Cardamom", "Nutmeg"],
+        "question": "The “cooling” sensation of mint or cardamom is due to compounds that activate which type of receptors?",
+        "options": ["Heat receptors", "Cold receptors (TRPM8 channels)", "Pain receptors", "Sweet taste receptors"],
         "answer": 1
     },
     7: {
-        "question": "Gingerol is the bioactive compound in which spice?",
-        "options": ["Garlic", "Onion", "Ginger", "Horseradish"],
+        "question": "What type of organic molecule is eugenol, the main active compound in cloves?",
+        "options": ["Carbohydrate", "Terpenoid alcohol", "Phenolic alcohol", "Protein"],
         "answer": 2
     },
     8: {
-        "question": "What gives saffron its distinctive color?",
-        "options": ["Carotene", "Chlorophyll", "Crocin", "Anthocyanin"],
-        "answer": 2
+        "question": "Which spice was once so valuable it was used as currency?",
+        "options": ["Cinnamon", "Paprika", "Turmeric", "Black pepper"],
+        "answer": 3
     },
     9: {
-        "question": "Which compound gives vanilla its characteristic flavor?",
-        "options": ["Vanillin", "Eugenol", "Menthol", "Thymol"],
-        "answer": 0
+        "question": "Capsaicin, the compound that makes chili peppers “hot,” is most concentrated in:",
+        "options": ["The seeds", "The skin", "The stem", "The white pith/placenta"],
+        "answer": 3
     },
     10: {
-        "question": "Allicin is the active compound formed when crushing which spice?",
-        "options": ["Onion", "Ginger", "Garlic", "Mustard"],
+        "question": "The “bite” of black pepper comes from which molecule?",
+        "options": ["Capsaicin", "Curcumin", "Piperine", "Eugenol"],
         "answer": 2
     },
     11: {
-        "question": "Which spice contains myristicin as its psychoactive compound?",
-        "options": ["Nutmeg", "Mace", "Both Nutmeg and Mace", "Neither"],
-        "answer": 2
+        "question": "Curcumin, studied for its anti-inflammatory effects, is found in which spice?",
+        "options": ["Tumeric", "Cinnamon", "Clove", "Nutmeg"],
+        "answer": 0
     },
     12: {
-        "question": "Carvone gives its characteristic flavor to which spice?",
-        "options": ["Basil", "Oregano", "Caraway", "Thyme"],
+        "question": "The double bonds in many spice-derived molecules can undergo:",
+        "options": ["Hydrogenation", "Hydrolysis", "All of the above", "None of the above"],
         "answer": 2
     },
     13: {
-        "question": "Which compound makes mustard seeds release their heat?",
-        "options": ["Sinigrin", "Capsaicin", "Piperine", "Gingerol"],
-        "answer": 0
+        "question": "The bright red pigment in paprika and chili peppers belongs to which class of organic compounds?",
+        "options": ["Anthocyanins", "Carotenoids", "Alkaloids", "Phenols"],
+        "answer": 1
     },
     14: {
-        "question": "Linalool is a major component in which spice's essential oil?",
-        "options": ["Rosemary", "Coriander", "Sage", "Bay Leaf"],
+        "question": "Which spice owes its distinctive blue color in essential oil to the compound chamazulene, formed during distillation?",
+        "options": ["Ginger", "Blue chamomile", "Clove", "Nutmeg"],
         "answer": 1
     },
     15: {
-        "question": "Which spice contains the compound safranal?",
-        "options": ["Paprika", "Turmeric", "Saffron", "Annatto"],
-        "answer": 2
+        "question": "The compound responsible for the aroma of citrus peels, sometimes found in coriander and cardamom oils, is:",
+        "options": ["Eugenol", "Vanillin", "Myrcene", "Limonene"],
+        "answer": 3
     },
     16: {
-        "question": "Thymol is the primary antiseptic compound in which spice?",
-        "options": ["Basil", "Mint", "Oregano", "Thyme"],
-        "answer": 3
+        "question": "Cinnamaldehyde can be oxidized to which organic compound?",
+        "options": ["Cinnamic acid", "Benzyl alcohol", "Benzaldehyde", "Phenol"],
+        "answer": 0
     }
 }
 
 # Location hints - CUSTOMIZE THESE FOR YOUR CAMPUS!
 LOCATION_HINTS = {
-    1: "Where knowledge blooms and books align, seek the entrance where students dine.",
-    2: "In halls of science where atoms dance, find the place of chemical romance.",
-    3: "Where athletes train and victories soar, look near the gym's main floor.",
-    4: "Student services guide your way, find where IDs are made each day.",
-    5: "Art and culture on display, seek the gallery's entryway.",
-    6: "Where cars rest in ordered rows, find the lot where everyone goes.",
-    7: "Technology and computers reign, find the lab where skills you gain.",
-    8: "Where performances come alive, near the stage you must arrive.",
-    9: "At the heart where paths all meet, find the quad beneath your feet.",
-    10: "Where caffeine flows and students meet, find the campus coffee seat.",
-    11: "Health and wellness is the goal, find the clinic's entrance hall.",
-    12: "Silent study, focused minds, find the quiet floor that binds.",
-    13: "Fresh air flows on the rooftop space, find the garden's greenest place.",
-    14: "Where mail arrives and packages wait, find the campus postal gate.",
-    15: "Emergency help is always near, find the security office here.",
-    16: "Where faculty gather and plans are made, find the administration's arcade."
+    1: "Where you go for safety concerns and to get your student ID (security desk)",
+    2: "Where you go to report any incidents that occurred on campus (student services)",
+    3: "Where you can get your school-provided devices and ask questions or report concerns about your student account (IT)",
+    4: "Where you can get free printing services (hint: it's on the 1st floor)",
+    5: "Where you go for chemistry tutoring provided by ACS (bonding with chemistry)",
+    6: "Where you for to ask about the library resources available to students (library help desk)",
+    7: "Where you go to pay for tuition or any pending balances (business services)",
+    8: "Where you go to check in for financial aid services (welcome center wright stop)",
+    9: "Where you go to meet your transfer advisor (advising and transfer center)",
+    10: "Where you get your resume fixed up and learn about internship/work opportunities (career center)",
+    11: "Where you can go for tutoring and writing support outside of the engineering center (tutoring/writing center)",
+    12: "Where you can heat up your food, buy snacks from the vending machines, and purchase hot meals (cafeteria)",
+    13: "Where you go for mental health and wellness support (wellness center)",
+    14: "Where you go to learn about resources available to first year students (first year experience center)",
+    15: "Where you go for student organization related concerns and questions (activities and special events center)",
+    16: "Where you go to meet your student government officers and learn about campus initiatives (SGA office)"
 }
 
 @app.route('/')
@@ -414,9 +414,9 @@ def admin_dashboard():
         
         if user.last_activity:
             minutes_ago = (datetime.utcnow() - user.last_activity).total_seconds() / 60
-            if minutes_ago < 5:
+            if minutes_ago < 10:
                 activity_status = 'active'
-            elif minutes_ago < 15:
+            elif minutes_ago < 20:
                 activity_status = 'idle'
             else:
                 activity_status = 'inactive'
